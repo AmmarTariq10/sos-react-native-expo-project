@@ -15,7 +15,7 @@ import {
   StatusBar
 } from 'react-native';
 import { Constants } from 'expo';
-
+const Pulse = require('react-native-pulse');
 export default class home extends Component {
 
 static navigationOptions = {
@@ -29,11 +29,13 @@ componentDidMount(){
   this._startAnimation()
 }
 
+
+
 _startAnimation(){
   this.animatedValue.setValue(0)
     Animated.timing(this.animatedValue, {
     toValue: 100,
-    duration: 2000,
+    duration:1000,
     easing:Easing.bounce
   
   }).start(()=>{this._startAnimation()});
@@ -42,7 +44,7 @@ _startAnimation(){
 
     const interpolateColor = this.animatedValue.interpolate({
       inputRange: [0, 150],
-      outputRange: ['rgb(255, 255, 255)', 'rgb(255,255,255)']
+      outputRange: ['rgba(0, 0, 0,0)', 'rgba(0,0,0,0)']
     });
     const animatedStyle = {
       backgroundColor: interpolateColor,
@@ -53,44 +55,44 @@ _startAnimation(){
  
     return (
      
-     <View style={styles.container}>
-     <StatusBar backgroundColor="#064f9a"/>
-     <View style={styles.statusBar} /> 
+<View style={styles.container}>
+<StatusBar backgroundColor="#064f9a"/>
+  <View style={styles.statusBar} /> 
+    <ImageBackground source={require('../../imgs/main-bg.jpg')} style={styles.backgroundImage}>
     
-      <ImageBackground source={require('../../imgs/main-bg.jpg')} style={styles.backgroundImage}>
+        <View style={styles.mainHeaderContainer}>
+             <Text style={styles.topTitle}>SOS</Text>
+        </View>
     
-    <View>
-     <Text style={styles.topTitle}>SOS</Text>
-    </View>
-    
-    <View style={styles.content}>
+         <View style={styles.content}>
 
-    <View style={styles.heyTitleContainer}>
-      <Text style={styles.heytite}>HEY</Text>
-    </View>
+                     <View style={styles.heyTitleContainer}>
+                              <Text style={styles.heytite}>HEY</Text>
+                      </View>
 
-    <View style={styles.textContainer}>
-      <Text style={styles.simtext}>Please tap to the button below if youare in danger</Text>
-    </View>
+                      <View style={styles.textContainer}>
+                            <Text style={styles.simtext}>Please tap to the button below if youare in danger</Text>
+                      </View>
 
-    <View style={styles.arrowContainer}>
-      <Animated.View style={[animatedStyle]}>
-      <Image source={require('../../imgs/arrow.png')} style={[styles.arrow,]}></Image>
-      </Animated.View>
-    </View>
+                       <View style={styles.arrowContainer}>
+                          <Animated.View style={[animatedStyle]}>
+                            <Image source={require('../../imgs/arrow.png')} style={[styles.arrow,]}></Image>
+                          </Animated.View>
+                      </View>
     </View>
 
-      <View style={styles.buttonContainer}>
-      <TouchableOpacity >
-      <View style={styles.redbox}>
-      <Image source={require('../../imgs/sos-btn.png')} style={styles.sostxt}></Image>
+      <View style={styles.btnContainer}>
+          <TouchableOpacity>
+          <Pulse color='df1e36' numPulses={3} diameter={400} speed={20} duration={2000} />
+           <View style={styles.redbox}>
+           <Image source={require('../../imgs/sos-btn.png')} style={styles.sostxt}></Image>
+            </View>
+          </TouchableOpacity>
       </View>
-      </TouchableOpacity>
-     </View>
 
      </ImageBackground>
 
-     </View>
+</View>
     
     );
   }
@@ -100,10 +102,20 @@ const animatedStyle = {opacity: this.animatedValue}
 
 const styles = StyleSheet.create({
 
-  heyTitleContainer:{backgroundColor:'red',flex:1},
-  textContainer:{backgroundColor:'yellow',flex:1},
-  arrowContainer:{backgroundColor:'green',flex:3},
-  buttonContainer:{backgroundColor:'orange',flex:4},
+  mainHeaderContainer:{
+
+    justifyContent:'center',
+    backgroundColor: '#064f9a',
+    alignSelf: 'stretch',
+    padding: 15,
+  },
+
+  heyTitleContainer:{
+    flex:0.3,
+  },
+  textContainer:{flex:1},
+  arrowContainer:{flex:1.7},
+
   statusBar: {
     backgroundColor: "#064f9a",
   
@@ -118,19 +130,23 @@ const styles = StyleSheet.create({
     width: null,
   },
   content: {
-    padding: 10,
+    flex:1,
+    paddingTop:10,
+    paddingBottom:0,
+    paddingLeft:0,
+    paddingRight:0,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  btnContainer:{
+  
+    flex:1,
+  alignItems: 'center',},
   topTitle:{
     color: '#fff',
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
-    justifyContent:'center',
-    backgroundColor: '#064f9a',
-    alignSelf: 'stretch',
-    padding: 15,
   
   },
   heytite:{
