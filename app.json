@@ -7,7 +7,6 @@
     "privacy": "public",
     "androidStatusBar": {
       "backgroundColor": "#064f9a"
-      
     },
     "sdkVersion": "26.0.0",
     "platforms": ["ios", "android"],
@@ -17,7 +16,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
-      "backgroundImage": "#ffffff"
+      "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
