@@ -1,10 +1,14 @@
 {
   "expo": {
   
-    "name": "splash-test",
+    "name": "sos",
     "description": "This project is really great.",
     "slug": "splash-test",
     "privacy": "public",
+    "androidStatusBar": {
+      "backgroundColor": "#064f9a"
+      
+    },
     "sdkVersion": "26.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
@@ -12,8 +16,8 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundImage": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

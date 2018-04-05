@@ -9,19 +9,40 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Animated,
+  Easing,
+  StatusBar
 } from 'react-native';
-
+import { Constants } from 'expo';
 
 export default class home extends Component {
+  UNSAFE_componentWillMount(){
+    
+  }
+
   static navigationOptions = {
     header: null
+} 
+
+animStart(){
+  this.animatedValue = new Animated.Value(0.1);
+  Animated.timing(this.animatedValue,{
+    toValue:1,
+    duration:1000,
+    easing:Easing.spring
+  }).start()
 }
+
   render() {
-    
+   const animatedStyle = {opacity: this.animatedValue}
+
+   
     return (
      
      <View style={styles.container}>
+     <StatusBar backgroundColor="#064f9a"/>
+     <View style={styles.statusBar} />
      <ImageBackground source={require('../../imgs/main-bg.jpg')} style={styles.backgroundImage}>
      <Text style={styles.topTitle}>SOS</Text>
        
@@ -29,14 +50,16 @@ export default class home extends Component {
     
      <Text style={styles.heytite}>HEY</Text>
      <Text style={styles.simtext}>Please tap to the button below if youare in danger</Text>
+      <Animated.View style={animatedStyle}>
      <Image source={require('../../imgs/arrow.png')} style={styles.arrow}></Image>
+      </Animated.View>
      </View>
-   <View style={styles.content}>
-   <View style={styles.redbox}>
-   <Image source={require('../../imgs/sos-btn.png')} style={styles.sostxt}></Image>
-
-</View>
-
+     <View style={styles.content}>
+    <TouchableOpacity onPress={this.animStart()}>
+    <View style={styles.redbox}>
+    <Image source={require('../../imgs/sos-btn.png')} style={styles.sostxt}></Image>
+     </View>
+    </TouchableOpacity>
      </View>
 
      </ImageBackground>
@@ -47,6 +70,10 @@ export default class home extends Component {
 }
 
 const styles = StyleSheet.create({
+  statusBar: {
+    backgroundColor: "#064f9a",
+  
+  },
   container: {
     flex: 1,
     
@@ -66,9 +93,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
+    justifyContent:'center',
     backgroundColor: '#064f9a',
     alignSelf: 'stretch',
     padding: 15,
+  
   },
   heytite:{
     color: '#333333',
@@ -83,6 +112,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   arrow:{
+    marginTop:20,
     width: 33,
     height: 79,
   },
@@ -93,9 +123,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,
-    
+    opacity:1
   },
-  
   sostxt:{
     justifyContent: 'center',
     alignItems: 'center',

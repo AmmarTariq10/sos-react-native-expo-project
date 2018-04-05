@@ -12,7 +12,7 @@ import {
   KeyboardAvoidingView,
   StatusBar,
 } from 'react-native';
-
+import { Constants } from 'expo';
 
 export default class login extends Component {
   static navigationOptions = {
@@ -22,34 +22,38 @@ export default class login extends Component {
     
     return (
      <View style={styles.container}>
-     <StatusBar
-     backgroundColor="blue"
-     barStyle="light-content" />
+    
+     <View style={styles.statusBar} />
+
      <ImageBackground  source={require('../../imgs/bac.png')} style={styles.backgroundImage}>
      <View style={styles.content}>
-     <KeyboardAvoidingView behavior="padding" style={styles.form} >
+     <KeyboardAvoidingView behavior="padding"  >
      <Image source={require('../../imgs/logo.png')} style={styles.logo}></Image>
-    
-     <TextInput underlineColorAndroid='transparent'  style={styles.input} placeholder='Name'></TextInput>
-    <TextInput secureTextEntry={true} underlineColorAndroid='transparent' style={styles.input} placeholder='Password'></TextInput>
-    
-
+     <TextInput autoFocus={false} underlineColorAndroid='transparent'  style={styles.input} placeholder='Name'></TextInput>
+    <TextInput autoFocus={false} secureTextEntry={true} underlineColorAndroid='transparent' style={styles.input} placeholder='Password'></TextInput>
     <TouchableOpacity onPress={()=>this.props.navigation.navigate('Home')} style={styles.buttonContainer}>
     <Text style={styles.buttonText}>LOGIN</Text>
     </TouchableOpacity>
+    <TouchableOpacity>
       <Text style={styles.forText}>Forget Password?</Text>
+      </TouchableOpacity>
        </KeyboardAvoidingView>
        </View>
-       
-
      </ImageBackground>
      </View>
     
     );
   }
+ 
 }
 
+
+
 const styles = StyleSheet.create({
+  statusBar: {
+    backgroundColor: "#064f9a",
+  
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -57,7 +61,7 @@ const styles = StyleSheet.create({
    
   },
   newview:{
-    justifyContent: 'space-between',
+    
     alignItems: 'center',
     alignSelf: 'stretch',
   },
